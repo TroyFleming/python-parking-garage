@@ -33,15 +33,16 @@ class parkingGarage():
             # Collects license plate number to place into currentTickets dictionary
             licensePlate = input('\nPlease enter your license plate number:\n')
 
-            # If license plate is already in system and upaid, informs customer, otherwise will add new item or update current item
-            # to currentTickets dictionary
+            # If license plate is already in system and upaid, informs customer,
+            # otherwise will add new item or update current item to currentTickets dictionary
             if licensePlate in self.currentTicket or licensePlate in self.currentTicket \
                 and self.currentTicket[licensePlate]['Paid'] == False:
-                print('\nA ticket has already been assigned to this license plate. Please pay if you are ready to leave.')
+                print('\nA ticket has already been assigned to this license plate. \
+                      Please pay if you are ready to leave.')
                 exit
 
-            # If new license plate entered, collects it and creates a dictionary item to store assigned ticket number, parking space,
-            # and payment status
+            # If new license plate entered, collects it and creates a dictionary item
+            # to store assigned ticket number, parking space and payment status
             else:
                 self.currentTicket[licensePlate.lower()] = {'Ticket': self.tickets[0], \
                                                             'Parking Space': self.parkingSpaces[0], \
@@ -67,20 +68,24 @@ class parkingGarage():
     def payForParking(self):
 
         # Customer must enter license plate number to continue
-        payPrompt = input('\nPlease enter your license plate number to pay, or type "Exit" to quit.\n\n')
+        payPrompt = input('\nPlease enter your license plate number to pay, \
+                          or type "Exit" to quit.\n\n')
         if payPrompt == 'Exit':
             exit
 
         # If the license plate entered is not found in dictionary currentTickets, prompts them to verify and try again
         elif payPrompt.lower() not in self.currentTicket:
-            print('\nThat license plate cannot be found. Please verify the correct plate info and try again.')
+            print('\nThat license plate cannot be found. Please \
+                  verify the correct plate info and try again.')
 
         elif self.currentTicket[payPrompt.lower()]['Paid'] == True:
-            print('\nThat ticket has already been paid! Please get a new ticket if you would like to use the garage.')
+            print('\nThat ticket has already been paid! Please get a new \
+                  ticket if you would like to use the garage.')
 
         # If license plate is found, prompts them for a payment type
         else:
-            payOptions = input('\nYour balance is: $5.00\n\nHow would you like to pay?\n\n- Cash (Enter 1)\n- Card (Enter 2)\n ')
+            payOptions = input('\nYour balance is: $5.00\n\nHow would you like to pay? \
+                               \n\n- Cash (Enter 1)\n- Card (Enter 2)\n ')
 
             # If nothing entered, or invalid options entered, goes back to main menu options
             if payOptions == '':
@@ -88,7 +93,8 @@ class parkingGarage():
             
             # If either payment option is selected, pays ticket and informs them of time to leave
             elif payOptions == '1' or payOptions == '2':
-                print('Your parking ticket has been paid! You have 15 minutes to exit the garage.\n\nThank you! Have a nice day.\n')
+                print('Your parking ticket has been paid! You have 15 minutes to exit \
+                      the garage.\n\nThank you! Have a nice day.\n')
 
                 # Once paid, returns the ticket number and parking space back to their respective lists via append
                 # and changes their payment status to True
@@ -107,7 +113,8 @@ def runPG():
     while True:
 
         # Customer must either get a new ticket, pay for a current ticket, or quit
-        ticketDispense = (input('\nWhat would you like to do?\n\n- Get Ticket (Enter 1)\n- Pay (Enter 2)\n- Quit (Enter 3)\n'))
+        ticketDispense = (input('\nWhat would you like to do?\n\n- Get Ticket \
+                                (Enter 1)\n- Pay (Enter 2)\n- Quit (Enter 3)\n'))
 
         # If option 3 (quit) entered, or left blank, quits program
         if ticketDispense == '3' or ticketDispense == '':
