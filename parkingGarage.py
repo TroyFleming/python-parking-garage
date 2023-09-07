@@ -35,15 +35,17 @@ class parkingGarage():
 
             # If license plate is already in system and upaid, informs customer, otherwise will add new item or update current item
             # to currentTickets dictionary
-            if licensePlate in self.currentTicket or licensePlate in self.currentTicket and self.currentTicket[licensePlate]['Paid'] == False:
+            if licensePlate in self.currentTicket or licensePlate in self.currentTicket \
+                and self.currentTicket[licensePlate]['Paid'] == False:
                 print('\nA ticket has already been assigned to this license plate. Please pay if you are ready to leave.')
                 exit
 
-            # If new license plate, collects it and creates a dictionary item to store assigned ticket number, parking space,
+            # If new license plate entered, collects it and creates a dictionary item to store assigned ticket number, parking space,
             # and payment status
             else:
-                self.currentTicket[licensePlate.lower()] = {'Ticket': self.tickets[0], 'Parking Space': self.parkingSpaces[0], \
-                                                'Paid': False}
+                self.currentTicket[licensePlate.lower()] = {'Ticket': self.tickets[0], \
+                                                            'Parking Space': self.parkingSpaces[0], \
+                                                            'Paid': False}
 
                 # Assigns the first available ticket and space from each list, and pops them as they are assigned
                 self.tickets.pop(0)
@@ -72,6 +74,9 @@ class parkingGarage():
         # If the license plate entered is not found in dictionary currentTickets, prompts them to verify and try again
         elif payPrompt.lower() not in self.currentTicket:
             print('\nThat license plate cannot be found. Please verify the correct plate info and try again.')
+
+        elif self.currentTicket[payPrompt.lower()]['Paid'] == True:
+            print('\nThat ticket has already been paid! Please get a new ticket if you would like to use the garage.')
 
         # If license plate is found, prompts them for a payment type
         else:
